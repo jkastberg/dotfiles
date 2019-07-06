@@ -3,3 +3,11 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+
+alias gitst="git status"
+alias gitpu="git pull"
+alias gitco="git commit"
+alias gitre="git pull --rebase origin master"
+function gitpu { 
+  git push origin HEAD:"$1"
+}

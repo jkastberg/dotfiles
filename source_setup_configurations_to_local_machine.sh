@@ -6,7 +6,6 @@ vimrcLocation=$(pwd)/vim/.vimrc
 fontsLocation=$(pwd)/fonts
 
 function append_bash_to_local {
-
   if grep -q $bashLocation $HOME/.bashrc.user 
   then
     echo "Bash file already linked"
@@ -20,20 +19,18 @@ function append_bash_to_local {
 }
 
 function append_tmux_to_local {
-
-  if  grep -q $tmuxLocation $HOME/.tmux.conf
+  if grep -q $tmuxLocation $HOME/.tmux.conf
   then
     echo "Tmux already linked"
   else 
     echo "" >> $HOME/.tmux.conf
     echo "source-file "$tmuxLocation >> $HOME/.tmux.conf
     echo "Tmux linked"
-  fi
+  fi 
 }
 
 function append_vimrc_to_local {
-
-  if  grep -q $vimrcLocation $HOME/.vimrc
+  if grep -q $vimrcLocation $HOME/.vimrc
   then
     echo "Vimrc already linked"
   else 
@@ -44,7 +41,6 @@ function append_vimrc_to_local {
 }
 
 function make_link_for_fonts {
-
   mkdir -p $HOME/.fonts
   if [ -L $HOME/.fonts/fonts ]
   then
