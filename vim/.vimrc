@@ -15,6 +15,7 @@ set hlsearch
 set ignorecase
 set smartcase
 set showmatch
+set ruler
 set t_ut=
 
 syntax on
