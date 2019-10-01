@@ -3,9 +3,10 @@ filetype off                  " required
 
 " set the runtimSetup/ path to include Vundle and initialize
 set rtp+=~/Setup/vim/bundle/Vundle.vim
-call vundle#begin()
+"call vundle#begin()
+
 " alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+call vundle#begin('~/Setup/vim/bundle/')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
