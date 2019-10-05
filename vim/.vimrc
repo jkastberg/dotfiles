@@ -1,24 +1,33 @@
 so ~/Setup/vim/.vimrc_plugins
 
-set nocompatible
+set autoindent
 set background=dark
-nnoremap <esc><esc> :nohl<cr>
-set number
+set expandtab
 set hidden
 set history=100
-set mouse=a
-set nowrap
-set tabstop=2
-set shiftwidth=2
-set expandtab
-set smartindent
-set autoindent
 set hlsearch
 set ignorecase
-set smartcase
-set showmatch
+set incsearch
+set laststatus=2
+set mouse=a
+set nocompatible
+set nowrap
+set number
 set ruler
+set shiftwidth=2
+set showmatch
+set scrolloff=1
+set sidescrolloff=5
+set smartcase
+set smartindent
+set smarttab
 set t_ut=
+set tabstop=2
+set wildmenu
+
+noremap <esc><esc> :nohl<cr>
+
+let mapleader=","
 
 syntax on
 

@@ -5,25 +5,49 @@ filetype off                  " required
 set rtp+=~/Setup/vim/bundle/Vundle.vim
 call vundle#begin('~/Setup/vim/bundle/')
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim' " required!
 
-Plugin 'ycm-core/YouCompleteMe'
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-"Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
+" --- YouCompleteMe ---
+" Code autocompletion
+" Plugin 'ycm-core/YouCompleteMe'
+
+" --- NERDTree ---
+" Show files as a tree
+Plugin 'scrooloose/nerdtree'
+Plugin 'xuyuanp/nerdtree-git-plugin' " Show git status in tree
+autocmd vimenter * NERDTree " Open nerdtree automatically when vim starts
+let NERDTreeShowHidden=1 " Show hidden files in tree
+
+" --- vim-Airline ---
+" New vim statusline
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+let g:airline#extensions#tabline#enabled = 1 " Automatically displays all buffers when there's only one tab open
+let g:airline_powerline_fonts = 1 " Enable powerline fonts
+
+
+" --- ctrlp ---
+" Effectivly search files and/or buffer
+Plugin 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_working_path_mode = 'ra' " When invoked without explicit starting directory, use nearest ancestor that is a git root
+
+" --- UltiSnips ---
+" Use snippets
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them:
+let g:UltiSnipsExpandTrigger="<S-tab>" " Trigger configuration. Do not use <tab> if you use YouCompleteMe.
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
+
+" --- EasyMotion ---
+" Enables easier jumping in buffer
+Plugin 'easymotion/vim-easymotion'
+
+" --- Delimitmate ---
+" Automatically closes quotes, parathesis, brackets, etc
+Plugin 'raimondi/delimitmate'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
