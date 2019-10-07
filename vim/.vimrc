@@ -1,8 +1,11 @@
 so ~/Setup/vim/.vimrc_plugins
 
+set nocompatible
 set autoindent
 set background=dark
 set expandtab
+set encoding=utf-8
+set fileencoding=utf-8
 set hidden
 set history=100
 set hlsearch
@@ -10,7 +13,6 @@ set ignorecase
 set incsearch
 set laststatus=2
 set mouse=a
-set nocompatible
 set nowrap
 set number
 set ruler

@@ -15,7 +15,12 @@ Plugin 'VundleVim/Vundle.vim' " required!
 " Show files as a tree
 Plugin 'scrooloose/nerdtree'
 Plugin 'xuyuanp/nerdtree-git-plugin' " Show git status in tree
-autocmd vimenter * NERDTree " Open nerdtree automatically when vim starts
+augroup NERD
+  au!
+  autocmd VimEnter * NERDTree " Open nerdtree automatically when vim starts
+  autocmd VimEnter * wincmd p " Focus file buffer instead of nerdtree
+augroup END
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Close vim when no more buffers are open
 let NERDTreeShowHidden=1 " Show hidden files in tree
 
 " --- vim-Airline ---
@@ -24,7 +29,18 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 1 " Automatically displays all buffers when there's only one tab open
 let g:airline_powerline_fonts = 1 " Enable powerline fonts
-
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>- <Plug>AirlineSelectPrevTab
+nmap <leader>+ <Plug>AirlineSelectNextTab
 
 " --- ctrlp ---
 " Effectivly search files and/or buffer
