@@ -8,6 +8,8 @@ alias gitst="git status"
 alias gitpu="git pull"
 alias gitco="git commit"
 alias gitre="git pull --rebase origin master"
-function gitpu { 
+function gitpush { 
   git push origin HEAD:"$1"
 }
+
+alias sourceBash="source ~/.bashrc"
