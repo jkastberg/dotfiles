@@ -9,7 +9,8 @@ Plugin 'VundleVim/Vundle.vim' " required!
 
 " --- YouCompleteMe ---
 " Code autocompletion
-" Plugin 'ycm-core/YouCompleteMe'
+"Plugin 'ycm-core/YouCompleteMe'
+"let g:ycm_autoclose_preview_window_after_completion = 1
 
 " --- NERDTree ---
 " Show files as a tree
@@ -40,9 +41,10 @@ let g:ctrlp_working_path_mode = 'ra' " When invoked without explicit starting di
 " Use snippets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them:
-let g:UltiSnipsExpandTrigger="<S-tab>" " Trigger configuration. Do not use <tab> if you use YouCompleteMe.
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger='<c-k>'
+let g:UltiSnipsJumpForwardTrigger='<c-k>'
+let g:UltiSnipsJumpBackwardTrigger='<c-s-k>'
+let g:UltiSnipsListSnippets="<c-K>"
 " let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
 
 " --- EasyMotion ---
@@ -53,6 +55,8 @@ Plugin 'easymotion/vim-easymotion'
 " Automatically closes quotes, parathesis, brackets, etc
 Plugin 'raimondi/delimitmate'
 
+" --- Palenight colorscheme ---
+Plugin 'drewtempelmeyer/palenight.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
