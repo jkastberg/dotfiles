@@ -2,7 +2,7 @@
 set -g base-index 1
 
 # Utf8 is on
-# set -g utf8 on
+set -g utf8 on
 # set -g status-utf8 on
 
 # Upgrade $TERM
@@ -51,14 +51,8 @@ set-option -g status-interval 2
 set-option -g status-justify "centre"
 set-option -g status-left-length 90
 set-option -g status-right-length 90
-set-option -g status-left "#(~/Setup/tmux/tmux-powerline/powerline.sh left)"
-set-option -g status-right "#(~/Setup/tmux/tmux-powerline/powerline.sh right)"
-
-# Statusbar center
-tmux_conf_theme_window_status_current_fg='#000000'      # black
-tmux_conf_theme_window_status_current_bg='#00afff'      # light blue
-tmux_conf_theme_window_status_current_attr='bold'
-tmux_conf_theme_window_status_current_format='#I #W'
+#set-option -g status-left "#(~/Setup/tmux/tmux-powerline/powerline.sh left)"
+#set-option -g status-right "#(~/Setup/tmux/tmux-powerline/powerline.sh right)"
 
 # Plugins
 set -g @plugin 'tmux-plugins/tpm'
