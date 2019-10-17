@@ -28,8 +28,8 @@ set tabstop=2
 set wildmenu
 
 noremap <esc><esc> :nohl<cr>
-
 let mapleader=","
+nnoremap <leader>q :bp<cr>:bd #<cr> 
 
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
@@ -45,6 +45,7 @@ nmap <leader>+ <Plug>AirlineSelectNextTab
 
 
 syntax on
+colorscheme palenight
 
 filetype on
 filetype indent on
@@ -55,6 +56,4 @@ map <D-A-DOWN> <C-w><C-w>
 map <D-A-UP> <C-w>W
 
 command! Autoread set autoread | au CursorHold * checktime | call feedkeys("lh")
-
-
 
