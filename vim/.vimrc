@@ -46,6 +46,7 @@ nmap <leader>+ <Plug>AirlineSelectNextTab
 
 syntax on
 colorscheme palenight
+hi Normal guibg=NONE ctermbg=NONE
 
 filetype on
 filetype indent on
