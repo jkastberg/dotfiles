@@ -2,7 +2,7 @@
 set -g base-index 1
 
 # Utf8 is on
-# set -g utf8 on
+set -g utf8 on
 # set -g status-utf8 on
 
 # Upgrade $TERM
@@ -51,37 +51,21 @@ set-option -g status-interval 2
 set-option -g status-justify "centre"
 set-option -g status-left-length 90
 set-option -g status-right-length 90
-set-option -g status-left "#(~/Setup/tmux/tmux-powerline/powerline.sh left)"
-set-option -g status-right "#(~/Setup/tmux/tmux-powerline/powerline.sh right)"
-
-# Statusbar center
-tmux_conf_theme_window_status_current_fg='#000000'      # black
-tmux_conf_theme_window_status_current_bg='#00afff'      # light blue
-tmux_conf_theme_window_status_current_attr='bold'
-tmux_conf_theme_window_status_current_format='#I #W'
-
-# Pane color
-set -g window-active-style 'bg=#262626, fg=colour252' # Active pane grey
-set -g window-style 'bg=#1E1E1E, fg=colour245'  # Inactive pane sligthly darker
-
-# Center status bar
-set -g window-status-separator " " # Separate window info with space
-set -g window-status-style "bg=colour235, fg=colour136" # Active window with bold text and inverted color
-set -g window-status-format "#I #W" # Show windows info with index and name
-set -g window-status-current-style "bold, fg=colour235, bg=colour136" # Active window with bold text and inverted color
-set -g window-status-current-format "#I #W" # Show windows info with index and name
-
+#set-option -g status-left "#(~/Setup/tmux/tmux-powerline/powerline.sh left)"
+#set-option -g status-right "#(~/Setup/tmux/tmux-powerline/powerline.sh right)"
 
 # Plugins
 set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 
 # Plugins settings
-set -g @continuum-restore 'on' # Auto restore server
-set -g @resurrect-strategy-vim 'session' # Restore vim sessions alaso
+set -g @continuum-restore 'on'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run -b '~/Setup/tmux/plugins/tpm/tpm'
+
+new-session -n $HOST
 
 
