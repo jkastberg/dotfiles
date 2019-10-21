@@ -13,3 +13,4 @@ function gitpush {
 }
 
 alias sourceBash="source ~/.bashrc"
+alias tmux="tmux -2"
