@@ -3,3 +3,5 @@ vim/bundle/*
 !vim/bundle/Vundle.vim
 *.swp
 bash/.bashrc.custom_work
+tmux/plugins
+tmux/resurrect

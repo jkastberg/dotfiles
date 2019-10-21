@@ -19,11 +19,6 @@ fi
 setxkbmap -layout "se"
 
 ###################
-# Auto start tmux
-###################
-[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}
-
-###################
 # Functions for adding git to prompt
 ###################
 # get current branch in git repo
@@ -126,6 +121,11 @@ fi
 if [ -f ~/Setup/bash/.bashrc.custom_work ]; then
   . ~/Setup/bash/.bashrc.custom_work
 fi
+
+###################
+# Auto start tmux
+###################
+[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}
 
 
 

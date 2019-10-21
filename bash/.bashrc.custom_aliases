@@ -4,6 +4,15 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
+####################
+# Export stuff
+####################
+export LESS='-M -I -R'
+export PAGER=less
+export LESS="--ignore-case --quit-at-eof --LONG-PROMPT --squeeze-blank-lines --HILITE-UNREAD --search-skip-screen --RAW-CONTROL-CHARS"
+export LANG=en_US.UTF-8
+
+# Git aliases
 alias gitst="git status"
 alias gitpu="git pull"
 alias gitco="git commit"
@@ -14,3 +23,29 @@ function gitpush {
 
 alias sourceBash="source ~/.bashrc"
 alias tmux="tmux -2"
+
+# Test if true color is available by printing a gradient
+function testColorGradient {
+awk 'BEGIN{
+s="/\\/\\/\\/\\/\\"; s=s s s s s s s s s s s s s s s s s s s s s s s;
+for (colnum = 0; colnum<256; colnum++) {
+  r = 255-(colnum*255/255);
+  g = (colnum*510/255);
+  b = (colnum*255/255);
+  if (g>255) g = 510-g;
+    printf "\033[48;2;%d;%d;%dm", r,g,b;
+    printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;
+    printf "%s\033[0m", substr(s,colnum+1,1);
+  }
+  printf "\n";
+}'
+}
+# Print all 256 color
+function testColor256 {
+for i in {0..255} ; do
+  printf "\x1b[48;5;%sm%3d\e[0m " "$i" "$i"
+  if (( i == 15 )) || (( i > 15 )) && (( (i-15) % 6 == 0 )); then
+    printf "\n";
+  fi
+done
+}
