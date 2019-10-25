@@ -1,16 +1,31 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+" Path to current folder
+let s:current_dir = expand('%:p:h')
+
+
 " set the runtimSetup/ path to include Vundle and initialize
 set rtp+=~/Setup/vim/bundle/Vundle.vim
 call vundle#begin('~/Setup/vim/bundle/')
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim' " required!
 
-" --- YouCompleteMe ---
-" Code autocompletion
-"Plugin 'ycm-core/YouCompleteMe'
-"let g:ycm_autoclose_preview_window_after_completion = 1
+if has('python')
+  " --- YouCompleteMe ---
+  " Code autocompletion
+  Plugin 'ycm-core/YouCompleteMe'
+
+  " --- UltiSnips ---
+  " Use snippets
+  Plugin 'SirVer/ultisnips'
+  Plugin 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them:
+  let g:UltiSnipsExpandTrigger='<c-k>'
+  let g:UltiSnipsJumpForwardTrigger='<c-k>'
+  let g:UltiSnipsJumpBackwardTrigger='<c-s-k>'
+  let g:UltiSnipsListSnippets="<c-K>"
+  " let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
+endif
 
 " --- NERDTree ---
 " Show files as a tree
@@ -23,6 +38,12 @@ augroup NERD
 augroup END
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Close vim when no more buffers are open
 let NERDTreeShowHidden=1 " Show hidden files in tree
+let g:NERDTreeWinSize=50
+
+" --- Tagbar ---
+Plugin 'majutsushi/tagbar'
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_width = 60
 
 " --- vim-Airline ---
 " New vim statusline
@@ -35,17 +56,12 @@ let g:airline#extensions#tabline#buffer_idx_mode = 1
 " --- ctrlp ---
 " Effectivly search files and/or buffer
 Plugin 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_working_path_mode = 'ra' " When invoked without explicit starting directory, use nearest ancestor that is a git root
-
-" --- UltiSnips ---
-" Use snippets
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them:
-let g:UltiSnipsExpandTrigger='<c-k>'
-let g:UltiSnipsJumpForwardTrigger='<c-k>'
-let g:UltiSnipsJumpBackwardTrigger='<c-s-k>'
-let g:UltiSnipsListSnippets="<c-K>"
-" let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
+let g:ctrlp_cmd = 'CtrlPCurWD'
+let g:ctrlp_custom_ignore = {
+  \ 'dir': '\v[\/](out|utils|project|staging|bundle|plugins)|(\.(git))$', 
+  \ 'file': '\v\.(exe|so|dll|swp)$',
+  \ }
+let g:ctrlp_show_hidden = 1
 
 " --- EasyMotion ---
 " Enables easier jumping in buffer
@@ -57,6 +73,9 @@ Plugin 'raimondi/delimitmate'
 
 " --- Palenight colorscheme ---
 Plugin 'drewtempelmeyer/palenight.vim'
+
+" --- Tnux focus events ---
+Plugin 'tmux-plugins/vim-tmux-focus-events'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -71,4 +90,9 @@ filetype plugin indent on    " required
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
 " see :h vundle for more details or wiki for FAQ
-"
+let g:ycm_autoclose_preview_window_after_completion = 1
+" Let clangd fully control code completion
+let g:ycm_clangd_uses_ycmd_caching = 0
+" " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
+let g:ycm_clangd_binary_path = exepath("clangd")
+

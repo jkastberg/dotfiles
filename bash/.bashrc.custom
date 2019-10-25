@@ -125,7 +125,9 @@ fi
 ###################
 # Auto start tmux
 ###################
-[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}
+if [ -x "$(command -v tmux)" ]; then
+  [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}
+fi
 
 
 

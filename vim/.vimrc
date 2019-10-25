@@ -1,6 +1,7 @@
 so ~/Setup/vim/.vimrc_plugins
 
 set nocompatible
+set autoread
 set autoindent
 set background=dark
 set expandtab
@@ -43,6 +44,13 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>+ <Plug>AirlineSelectNextTab
 
+" Move lines using Alt+j/k
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
 
 syntax on
 colorscheme palenight
