@@ -4,33 +4,57 @@ filetype off                  " required
 " Path to current folder
 let s:current_dir = expand('%:p:h')
 
-
-" set the runtimSetup/ path to include Vundle and initialize
-set rtp+=~/Setup/vim/bundle/Vundle.vim
+set rtp+=~/Setup/vim/bundle/Vundle.vim " set the runtimSetup/ path to include Vundle and initialize
 call vundle#begin('~/Setup/vim/bundle/')
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim' " required!
 
+" ------------------------------------------ 
+"                Plugins 
+" ------------------------------------------
+
 if has('python')
-  " --- YouCompleteMe ---
-  " Code autocompletion
-  Plugin 'ycm-core/YouCompleteMe'
-
-  " --- UltiSnips ---
-  " Use snippets
-  Plugin 'SirVer/ultisnips'
+  Plugin 'ycm-core/YouCompleteMe' " Code autocompletion
+  Plugin 'SirVer/ultisnips' " Use snippets
   Plugin 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them:
-  let g:UltiSnipsExpandTrigger='<c-k>'
-  let g:UltiSnipsJumpForwardTrigger='<c-k>'
-  let g:UltiSnipsJumpBackwardTrigger='<c-s-k>'
-  let g:UltiSnipsListSnippets="<c-K>"
-  " let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
 endif
+Plugin 'scrooloose/nerdtree' " Show files as a tree
+Plugin 'xuyuanp/nerdtree-git-plugin' " Show git status in nerdtree
+Plugin 'majutsushi/tagbar' " Tagbag
+Plugin 'vim-airline/vim-airline' " New vim statusline
+Plugin 'vim-airline/vim-airline-themes' " Themes for airline
+Plugin 'ctrlpvim/ctrlp.vim' " Effectivly search files and/or buffer
+Plugin 'easymotion/vim-easymotion' " Enables easier moving in buffer
+Plugin 'raimondi/delimitmate' " Automatically closes quotes, parathesis, brackets, etc
+Plugin 'drewtempelmeyer/palenight.vim' " Palenight colorscheme
+Plugin 'tmux-plugins/vim-tmux-focus-events' " Fix focus events with tmux
 
-" --- NERDTree ---
-" Show files as a tree
-Plugin 'scrooloose/nerdtree'
-Plugin 'xuyuanp/nerdtree-git-plugin' " Show git status in tree
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" see :h vundle for more details or wiki for FAQ
+
+
+
+" ------------------------------------------ 
+"    Plugins specific commands and setting 
+" ------------------------------------------
+
+" YouCompleMe
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_clangd_uses_ycmd_caching = 0 " Let clangd fully control code completion
+let g:ycm_clangd_binary_path = exepath("clangd") " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
+
+
+" UltiSnips
+let g:UltiSnipsExpandTrigger='<c-k>'
+let g:UltiSnipsJumpForwardTrigger='<c-k>'
+let g:UltiSnipsJumpBackwardTrigger='<c-s-k>'
+let g:UltiSnipsListSnippets="<c-K>"
+" let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
+
+
+" NERDTree
 augroup NERD
   au!
   autocmd VimEnter * NERDTree " Open nerdtree automatically when vim starts
@@ -38,61 +62,49 @@ augroup NERD
 augroup END
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Close vim when no more buffers are open
 let NERDTreeShowHidden=1 " Show hidden files in tree
-let g:NERDTreeWinSize=50
+let g:NERDTreeWinSize=50 " Set default size of nerdtree window
+let NERDTreeIgnore = ['\.swp$'] " Ignore files in nerdtree
+nmap <F7> :NERDTreeToggle<CR> 
 
-" --- Tagbar ---
-Plugin 'majutsushi/tagbar'
-nmap <F8> :TagbarToggle<CR>
-let g:tagbar_width = 60
+" TagBar
+" Toogle tagbar shortcut
+nmap <F8> :TagbarToggle<CR> 
+let g:tagbar_width = 60 " Set default size of tagbar window
 
-" --- vim-Airline ---
-" New vim statusline
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+
+" Airline
 let g:airline#extensions#tabline#enabled = 1 " Automatically displays all buffers when there's only one tab open
 let g:airline_powerline_fonts = 1 " Enable powerline fonts
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 
-" --- ctrlp ---
-" Effectivly search files and/or buffer
-Plugin 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_cmd = 'CtrlPCurWD'
+
+" CtrlP
+let g:ctrlp_cmd = 'CtrlPCurWD' " Use cwd as default search base for <C-p>
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/](out|utils|project|staging|bundle|plugins)|(\.(git))$', 
-  \ 'file': '\v\.(exe|so|dll|swp)$',
-  \ }
-let g:ctrlp_show_hidden = 1
+      \ 'dir': '\v[\/](out|utils|project|staging|bundle|plugins)|(\.(git))$', 
+      \ 'file': '\v\.(exe|so|dll|swp)$',
+      \ } " Set custom ignore
+let g:ctrlp_show_hidden = 1 " Show hidden files in ctrlp
 
-" --- EasyMotion ---
-" Enables easier jumping in buffer
-Plugin 'easymotion/vim-easymotion'
+let g:ctrlp_buffer_func = { 'enter': 'CtrlPMappings' } " Close buffer in CtrlP-mode using ctrl+2 (<C-@>
+function! CtrlPMappings()
+  nnoremap <buffer> <silent> <C-@> :call <sid>DeleteBuffer()<cr>
+endfunction
+function! s:DeleteBuffer()
+  let path = fnamemodify(getline('.')[2:], ':p')
+  let bufn = matchstr(path, '\v\d+\ze\*No Name')
+  exec "bd" bufn ==# "" ? path : bufn
+  exec "norm \<F5>"
+endfunction
 
-" --- Delimitmate ---
-" Automatically closes quotes, parathesis, brackets, etc
-Plugin 'raimondi/delimitmate'
+" Searching
+if executable('ag') " Use ag for ctrlp and grep if available
+  command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+  " Create shortcut for searching instead of using :grep
+  nnoremap \ :Ag<SPACE> 
+  set grepprg=ag\ --vimgrep\ --hidden  " Use Ag over Grep
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""' " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_use_caching = 0 " ag is fast enough that CtrlP doesn't need to cache
+endif
 
-" --- Palenight colorscheme ---
-Plugin 'drewtempelmeyer/palenight.vim'
-
-" --- Tnux focus events ---
-Plugin 'tmux-plugins/vim-tmux-focus-events'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-let g:ycm_autoclose_preview_window_after_completion = 1
-" Let clangd fully control code completion
-let g:ycm_clangd_uses_ycmd_caching = 0
-" " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
-let g:ycm_clangd_binary_path = exepath("clangd")
 

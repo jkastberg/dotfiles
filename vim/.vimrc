@@ -28,6 +28,8 @@ set t_ut=
 set tabstop=2
 set wildmenu
 
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     
+
 noremap <esc><esc> :nohl<cr>
 let mapleader=","
 nnoremap <leader>q :bp<cr>:bd #<cr> 

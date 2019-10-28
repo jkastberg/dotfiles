@@ -1,6 +1,6 @@
 *.uuid
-vim/bundle/*
-!vim/bundle/Vundle.vim
+.git
+vim/bundle
 *.swp
 bash/.bashrc.custom_work
 tmux/plugins
