@@ -18,11 +18,12 @@ alias gitpu="git pull"
 alias gitco="git commit"
 alias gitre="git pull --rebase origin master"
 function gitpush { 
-  git push origin HEAD:"$1"
+  git push origin "$1"
 }
 
 alias sourceBash="source ~/.bashrc"
 alias tmux="tmux -2"
+alias please="sudo"
 
 # Test if true color is available by printing a gradient
 function testColorGradient {

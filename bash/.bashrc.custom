@@ -1,7 +1,6 @@
 ####################
 # Export stuff
 ####################
-export LESS='-M -I -R'
 export PAGER=less
 export LESS="--ignore-case --quit-at-eof --LONG-PROMPT --squeeze-blank-lines --HILITE-UNREAD --search-skip-screen --RAW-CONTROL-CHARS"
 

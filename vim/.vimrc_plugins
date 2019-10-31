@@ -28,6 +28,7 @@ Plugin 'easymotion/vim-easymotion' " Enables easier moving in buffer
 Plugin 'raimondi/delimitmate' " Automatically closes quotes, parathesis, brackets, etc
 Plugin 'drewtempelmeyer/palenight.vim' " Palenight colorscheme
 Plugin 'tmux-plugins/vim-tmux-focus-events' " Fix focus events with tmux
+Plugin 'bfrg/vim-cpp-modern' " syntax highlighting for c++
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -76,6 +77,19 @@ let g:tagbar_width = 60 " Set default size of tagbar window
 let g:airline#extensions#tabline#enabled = 1 " Automatically displays all buffers when there's only one tab open
 let g:airline_powerline_fonts = 1 " Enable powerline fonts
 let g:airline#extensions#tabline#buffer_idx_mode = 1
+" Switch between tabs/buffers using leader+indez
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>- <Plug>AirlineSelectPrevTab
+nmap <leader>+ <Plug>AirlineSelectNextTab
+
 
 
 " CtrlP
@@ -84,24 +98,14 @@ let g:ctrlp_custom_ignore = {
       \ 'dir': '\v[\/](out|utils|project|staging|bundle|plugins)|(\.(git))$', 
       \ 'file': '\v\.(exe|so|dll|swp)$',
       \ } " Set custom ignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_show_hidden = 1 " Show hidden files in ctrlp
-
-let g:ctrlp_buffer_func = { 'enter': 'CtrlPMappings' } " Close buffer in CtrlP-mode using ctrl+2 (<C-@>
-function! CtrlPMappings()
-  nnoremap <buffer> <silent> <C-@> :call <sid>DeleteBuffer()<cr>
-endfunction
-function! s:DeleteBuffer()
-  let path = fnamemodify(getline('.')[2:], ':p')
-  let bufn = matchstr(path, '\v\d+\ze\*No Name')
-  exec "bd" bufn ==# "" ? path : bufn
-  exec "norm \<F5>"
-endfunction
 
 " Searching
 if executable('ag') " Use ag for ctrlp and grep if available
   command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
   " Create shortcut for searching instead of using :grep
-  nnoremap \ :Ag<SPACE> 
+  nnoremap \ :Ag<SPACE>
   set grepprg=ag\ --vimgrep\ --hidden  " Use Ag over Grep
   let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""' " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_use_caching = 0 " ag is fast enough that CtrlP doesn't need to cache
