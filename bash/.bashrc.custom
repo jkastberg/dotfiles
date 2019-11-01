@@ -1,7 +1,6 @@
 ####################
 # Export stuff
 ####################
-export LESS='-M -I -R'
 export PAGER=less
 export LESS="--ignore-case --quit-at-eof --LONG-PROMPT --squeeze-blank-lines --HILITE-UNREAD --search-skip-screen --RAW-CONTROL-CHARS"
 
@@ -17,11 +16,6 @@ fi
 # Use swedish kb layout
 ####################
 setxkbmap -layout "se"
-
-###################
-# Auto start tmux
-###################
-[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}
 
 ###################
 # Functions for adding git to prompt
@@ -125,6 +119,13 @@ fi
 #####################
 if [ -f ~/Setup/bash/.bashrc.custom_work ]; then
   . ~/Setup/bash/.bashrc.custom_work
+fi
+
+###################
+# Auto start tmux
+###################
+if [ -x "$(command -v tmux)" ]; then
+  [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}
 fi
 
 

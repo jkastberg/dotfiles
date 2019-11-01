@@ -27,6 +27,7 @@ function append_tmux_to_local {
     echo "source-file "$tmuxLocation >> $HOME/.tmux.conf
     echo "Tmux linked"
   fi 
+  yes | cp $(pwd)/tmux/.tmux-powerlinerc $HOME
 }
 
 function append_vimrc_to_local {
