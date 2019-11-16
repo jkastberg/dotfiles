@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bashLocation=$(pwd)/bash/.bashrc.custom
+bashLocation=$(pwd)/bash/.bashrc
 tmuxLocation=$(pwd)/tmux/.tmux.conf
 vimrcLocation=$(pwd)/vim/.vimrc
 fontsLocation=$(pwd)/fonts

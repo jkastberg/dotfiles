@@ -4,8 +4,8 @@ filetype off                  " required
 " Path to current folder
 let s:current_dir = expand('%:p:h')
 
-set rtp+=~/Setup/vim/bundle/Vundle.vim " set the runtimSetup/ path to include Vundle and initialize
-call vundle#begin('~/Setup/vim/bundle/')
+set rtp+=~/dotfiles/vim/bundle/Vundle.vim " set the runtimSetup/ path to include Vundle and initialize
+call vundle#begin('~/dotfiles/vim/bundle/')
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim' " required!
 
@@ -13,7 +13,7 @@ Plugin 'VundleVim/Vundle.vim' " required!
 "                Plugins 
 " ------------------------------------------
 
-if has('python')
+if has('python') || has('python3')
   Plugin 'ycm-core/YouCompleteMe' " Code autocompletion
   Plugin 'SirVer/ultisnips' " Use snippets
   Plugin 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them:
