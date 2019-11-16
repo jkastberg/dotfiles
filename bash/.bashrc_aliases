@@ -20,6 +20,7 @@ alias gitre="git pull --rebase origin master"
 function gitpush { 
   git push origin "$1"
 }
+alias gitSubInit="git submodule update --recursive --remote"
 
 alias sourceBash="source ~/.bashrc"
 alias tmux="tmux -2"

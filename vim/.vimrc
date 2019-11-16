@@ -1,6 +1,6 @@
 let mapleader=","
 
-so ~/Setup/vim/.vimrc_plugins
+so ~/dotfiles/vim/.vimrc_plugins
 
 set nocompatible
 set autoindent

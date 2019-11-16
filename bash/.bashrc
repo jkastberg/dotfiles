@@ -110,15 +110,15 @@ __prompt_command() {
 #####################
 # Source aliases
 #####################
-if [ -f ~/Setup/bash/.bashrc.custom_aliases ]; then
-  . ~/Setup/bash/.bashrc.custom_aliases
+if [ -f ~/dotfiles/bash/.bashrc_aliases ]; then
+  . ~/dotfiles/bash/.bashrc_aliases
 fi
 
 #####################
 # Source work specific stuff
 #####################
-if [ -f ~/Setup/bash/.bashrc.custom_work ]; then
-  . ~/Setup/bash/.bashrc.custom_work
+if [ -f ~/dotfiles/bash/.bashrc_work ]; then
+  . ~/dotfiles/bash/.bashrc_work
 fi
 
 ###################
