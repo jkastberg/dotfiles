@@ -14,21 +14,24 @@ Plugin 'VundleVim/Vundle.vim' " required!
 " ------------------------------------------
 
 if has('python') || has('python3')
-  Plugin 'ycm-core/YouCompleteMe' " Code autocompletion
-  Plugin 'SirVer/ultisnips' " Use snippets
-  Plugin 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them:
+  Plugin 'ycm-core/YouCompleteMe'           " Code autocompletion
+  Plugin 'SirVer/ultisnips'                 " Use snippets
+  Plugin 'honza/vim-snippets'               " Snippets are separated from the engine. Add this if you want them:
 endif
-Plugin 'scrooloose/nerdtree' " Show files as a tree
-Plugin 'xuyuanp/nerdtree-git-plugin' " Show git status in nerdtree
-Plugin 'majutsushi/tagbar' " Tagbag
-Plugin 'vim-airline/vim-airline' " New vim statusline
-Plugin 'vim-airline/vim-airline-themes' " Themes for airline
-Plugin 'ctrlpvim/ctrlp.vim' " Effectivly search files and/or buffer
-Plugin 'easymotion/vim-easymotion' " Enables easier moving in buffer
-Plugin 'raimondi/delimitmate' " Automatically closes quotes, parathesis, brackets, etc
-Plugin 'drewtempelmeyer/palenight.vim' " Palenight colorscheme
+Plugin 'scrooloose/nerdtree'                " Show files as a tree
+Plugin 'xuyuanp/nerdtree-git-plugin'        " Show git status in nerdtree
+Plugin 'majutsushi/tagbar'                  " Tagbag
+Plugin 'vim-airline/vim-airline'            " New vim statusline
+Plugin 'vim-airline/vim-airline-themes'     " Themes for airline
+Plugin 'ctrlpvim/ctrlp.vim'                 " Effectivly search files and/or buffer
+Plugin 'easymotion/vim-easymotion'          " Enables easier moving in buffer
+Plugin 'raimondi/delimitmate'               " Automatically closes quotes, parathesis, brackets, etc
+Plugin 'drewtempelmeyer/palenight.vim'      " Palenight colorscheme
 Plugin 'tmux-plugins/vim-tmux-focus-events' " Fix focus events with tmux
-Plugin 'bfrg/vim-cpp-modern' " syntax highlighting for c++
+Plugin 'bfrg/vim-cpp-modern'                " syntax highlighting for c++
+Plugin 'scrooloose/nerdcommenter'           " Comment functions
+Plugin 'tpope/vim-fugitive'                 " Git wrapper
+Plugin 'godlygeek/tabular'                  " Text alignment
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -42,16 +45,16 @@ filetype plugin indent on    " required
 " ------------------------------------------
 
 " YouCompleMe
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_clangd_uses_ycmd_caching = 0 " Let clangd fully control code completion
-let g:ycm_clangd_binary_path = exepath("clangd") " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
+"let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_clangd_uses_ycmd_caching = 0                 "  Let clangd fully control code completion
+let g:ycm_clangd_binary_path       = exepath("clangd") "  Use installed clangd, not YCM-bundled clangd which doesn't get updates.
 
 
 " UltiSnips
-let g:UltiSnipsExpandTrigger='<c-k>'
-let g:UltiSnipsJumpForwardTrigger='<c-k>'
-let g:UltiSnipsJumpBackwardTrigger='<c-s-k>'
-let g:UltiSnipsListSnippets="<c-K>"
+let g:UltiSnipsExpandTrigger       = '<c-k>'
+let g:UltiSnipsJumpForwardTrigger  = '<c-k>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-s-k>'
+let g:UltiSnipsListSnippets        = "<c-K>"
 " let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
 
 
@@ -62,9 +65,9 @@ augroup NERD
   autocmd VimEnter * wincmd p " Focus file buffer instead of nerdtree
 augroup END
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Close vim when no more buffers are open
-let NERDTreeShowHidden=1 " Show hidden files in tree
-let g:NERDTreeWinSize=50 " Set default size of nerdtree window
-let NERDTreeIgnore = ['\.swp$'] " Ignore files in nerdtree
+let NERDTreeShowHidden = 1          " Show hidden files in tree
+let g:NERDTreeWinSize  = 50         " Set default size of nerdtree window
+let NERDTreeIgnore     = ['\.swp$'] " Ignore files in nerdtree
 nmap <F7> :NERDTreeToggle<CR> 
 
 " TagBar
@@ -74,8 +77,8 @@ let g:tagbar_width = 60 " Set default size of tagbar window
 
 
 " Airline
-let g:airline#extensions#tabline#enabled = 1 " Automatically displays all buffers when there's only one tab open
-let g:airline_powerline_fonts = 1 " Enable powerline fonts
+let g:airline#extensions#tabline#enabled         = 1 " Automatically displays all buffers when there's only one tab open
+let g:airline_powerline_fonts                    = 1 " Enable powerline fonts
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 " Switch between tabs/buffers using leader+indez
 nmap <leader>1 <Plug>AirlineSelectTab1
@@ -93,22 +96,19 @@ nmap <leader>+ <Plug>AirlineSelectNextTab
 
 
 " CtrlP
-let g:ctrlp_cmd = 'CtrlPCurWD' " Use cwd as default search base for <C-p>
+let g:ctrlp_cmd           = 'CtrlPCurWD' " Use cwd as default search base for <C-p>
+let g:ctrlp_show_hidden   = 1            " Show hidden files in ctrlp
+let g:ctrlp_user_command  = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_custom_ignore = {
       \ 'dir': '\v[\/](out|utils|project|staging|bundle|plugins)|(\.(git))$', 
       \ 'file': '\v\.(exe|so|dll|swp)$',
       \ } " Set custom ignore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-let g:ctrlp_show_hidden = 1 " Show hidden files in ctrlp
 
 " Searching
 if executable('ag') " Use ag for ctrlp and grep if available
-  command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-  " Create shortcut for searching instead of using :grep
-  nnoremap \ :Ag<SPACE>
-  set grepprg=ag\ --vimgrep\ --hidden  " Use Ag over Grep
+  set grepprg=ag\ --vimgrep\ --hidden                            " Use Ag over Grep
   let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""' " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_use_caching = 0 " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching  = 0                                   " ag is fast enough that CtrlP doesn't need to cache
 endif
 
 

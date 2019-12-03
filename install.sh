@@ -6,14 +6,14 @@ vimrcLocation=$(pwd)/vim/.vimrc
 fontsLocation=$(pwd)/fonts
 
 function append_bash_to_local {
-  if grep -q $bashLocation $HOME/.bashrc.user 
+  if grep -q $bashLocation $HOME/.bashrc
   then
     echo "Bash file already linked"
   else 
-    echo "" >> $HOME/.bashrc.user
-    echo "if [ -f "$bashLocation" ]; then" >> $HOME/.bashrc.user
-    echo "  . "$bashLocation >> $HOME/.bashrc.user
-    echo "fi" >> $HOME/.bashrc.user
+    echo "" >> $HOME/.bashrc
+    echo "if [ -f "$bashLocation" ]; then" >> $HOME/.bashrc
+    echo "  . "$bashLocation >> $HOME/.bashrc
+    echo "fi" >> $HOME/.bashrc
     echo "Bash file linked"
   fi
 }
@@ -52,8 +52,11 @@ function make_link_for_fonts {
   fi
 }
 
-while getopts ":tbvf" arg; do
+while getopts ":tbvfg" arg; do
   case "${arg}" in
+    g)  
+	git submodule update --init --recursive
+	;;
     t)
         append_tmux_to_local
         ;;
