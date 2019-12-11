@@ -29,6 +29,7 @@ set sidescrolloff=5
 set smartcase
 set smarttab
 set t_ut=
+set timeoutlen=1000 ttimeoutlen=0
 set tabstop=2
 set wildmenu
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     
