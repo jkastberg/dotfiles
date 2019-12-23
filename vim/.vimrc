@@ -34,9 +34,14 @@ set tabstop=2
 set wildmenu
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     
 
-noremap <esc><esc> :nohl<cr>
+" Remove highlighting with leader+esc
+noremap <leader><esc> :nohl<cr>
+" Close buffer with leader+q
 nnoremap <leader>q :bp<cr>:bd #<cr> 
+" Grep word under cursor with gr
+nnoremap gr :grep <cword> *<CR>
 
+" TODO fix shortcut for moving lines
 " Move lines using Alt+j/k
 "nnoremap <Esc>j :m .+1<CR>==
 "nnoremap <Esc>k :m .-2<CR>==
@@ -57,6 +62,7 @@ map <D-A-LEFT> <C-w>h
 map <D-A-DOWN> <C-w><C-w>
 map <D-A-UP> <C-w>W
 
+" Auto uppdate buffer when file changes
 command! Autoread set autoread | au CursorHold * checktime | call feedkeys("lh")
 
 
