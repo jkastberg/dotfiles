@@ -4,14 +4,6 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-####################
-# Export stuff
-####################
-export LESS='-M -I -R'
-export PAGER=less
-export LESS="--ignore-case --quit-at-eof --LONG-PROMPT --squeeze-blank-lines --HILITE-UNREAD --search-skip-screen --RAW-CONTROL-CHARS"
-export LANG=en_US.UTF-8
-
 # Git aliases
 alias gitst="git status"
 alias gitpu="git pull"

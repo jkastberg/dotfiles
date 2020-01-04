@@ -1,11 +1,8 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" Path to current folder
-let s:current_dir = expand('%:p:h')
-
-set rtp+=~/dotfiles/vim/bundle/Vundle.vim " set the runtimSetup/ path to include Vundle and initialize
-call vundle#begin('~/dotfiles/vim/bundle/')
+set rtp+=$DOTFILES_DIR/vim/bundle/Vundle.vim " set the runtimSetup/ path to include Vundle and initialize
+call vundle#begin('$DOTFILES_DIR/vim/bundle/')
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim' " required!
 
