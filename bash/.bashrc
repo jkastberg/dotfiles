@@ -57,7 +57,7 @@ if [ -f ~/dotfiles/bash/.bashrc_aliases ]; then
 fi
 
 #####################
-# Source work specific stuff
+# Source work stuff
 #####################
 if [ -f ~/dotfiles/bash/.bashrc_work ]; then
   . ~/dotfiles/bash/.bashrc_work
@@ -66,9 +66,10 @@ fi
 ###################
 # Auto start tmux
 ###################
-#if [ -x "$(command -v tmux)" ]; then
-#  [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}
-#fi
+# If tmux exists, and we are in an interactive shell, and tmux doesnt try do run within itself
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}
+fi
 
 
 
