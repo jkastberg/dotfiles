@@ -1,8 +1,10 @@
 ####################
 # Export stuff
 ####################
+export DOTFILES_DIR=$(dirname $(dirname ${BASH_SOURCE[0]}))
 export PAGER=less
 export LESS="--ignore-case --quit-at-eof --LONG-PROMPT --squeeze-blank-lines --HILITE-UNREAD --search-skip-screen --RAW-CONTROL-CHARS"
+export LANG=en_US.UTF-8
 
 if [ "$TERM" = "xterm" ]; then
   export TERM=xterm-256color
