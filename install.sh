@@ -52,26 +52,47 @@ function make_link_for_fonts {
   fi
 }
 
-while getopts ":tbvfg" arg; do
+function print_help {
+    echo "install.sh [-abfghtv]"
+    echo "  -a: init all"
+    echo "  -b: link bashrc"
+    echo "  -f: link font"
+    echo "  -g: init git submodules, neccessary for vim and tmux pluginmanager, and tmux powerline"
+    echo "  -h: help"
+    echo "  -t: link tmux"
+    echo "  -v: link vimrc"
+}
+
+while getopts ":atbvfgh" arg; do
   case "${arg}" in
+    a) 
+      git submodule update --init --recursive
+      append_bash_to_local
+      append_tmux_to_local
+      append_vimrc_to_local
+      make_link_for_fonts
+      ;;
     g)  
-	git submodule update --init --recursive
-	;;
+      git submodule update --init --recursive
+      ;;
     t)
-        append_tmux_to_local
-        ;;
+      append_tmux_to_local
+      ;;
     b)
-        append_bash_to_local
-        ;;
+      append_bash_to_local
+      ;;
     v)
-        append_vimrc_to_local
-        ;;
+      append_vimrc_to_local
+      ;;
     f)
-        make_link_for_fonts
-        ;;
+      make_link_for_fonts
+      ;;
+    h)
+      print_help
+      ;;
     *)
-        echo "[-t] [-b] [-v] [-f]"
-        ;;
+      print_help
+      ;;
   esac
 done
 

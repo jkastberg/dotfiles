@@ -3,7 +3,7 @@
 ####################
 export DOTFILES_DIR=$(dirname $(dirname ${BASH_SOURCE[0]}))
 export PAGER=less
-export LESS="--ignore-case --quit-at-eof --LONG-PROMPT --squeeze-blank-lines --HILITE-UNREAD --search-skip-screen --RAW-CONTROL-CHARS"
+export LESS="--ignore-case --LONG-PROMPT --squeeze-blank-lines --HILITE-UNREAD --search-skip-screen --RAW-CONTROL-CHARS --quit-if-one-screen --no-init"
 export LANG=en_US.UTF-8
 
 if [ "$TERM" = "xterm" ]; then
