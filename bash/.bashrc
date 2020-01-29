@@ -15,6 +15,15 @@ if [ "$TERM" = "screen" -o "$TERM" = "screen-256color" ]; then
 fi
 
 #####################
+# Fuction for adding to path
+# Will not add if argument already exists in path
+#####################
+addToPath () {
+  if ! echo "$PATH" | /bin/grep -Eq "(^|:)$1($|:)" ; then
+    PATH="$1:$PATH"
+  fi
+}
+#####################
 # PROMPT
 #####################
 MYPSDIR_AWK=$(cat << 'EOF'
@@ -69,9 +78,9 @@ fi
 # Auto start tmux
 ###################
 # If tmux exists, and we are in an interactive shell, and tmux doesnt try do run within itself
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}
-fi
+#if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+#  [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}
+#fi
 
 
 
