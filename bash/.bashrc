@@ -15,6 +15,15 @@ if [ "$TERM" = "screen" -o "$TERM" = "screen-256color" ]; then
 fi
 
 #####################
+# Fuction for adding to path
+# Will not add if argument already exists in path
+#####################
+addToPath () {
+  if ! echo "$PATH" | /bin/grep -Eq "(^|:)$1($|:)" ; then
+    PATH="$1:$PATH"
+  fi
+}
+#####################
 # PROMPT
 #####################
 MYPSDIR_AWK=$(cat << 'EOF'
