@@ -78,9 +78,9 @@ fi
 # Auto start tmux
 ###################
 # If tmux exists, and we are in an interactive shell, and tmux doesnt try do run within itself
-#if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-#  [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}
-#fi
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}
+fi
 
 
 
