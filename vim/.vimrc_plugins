@@ -29,6 +29,7 @@ Plugin 'bfrg/vim-cpp-modern'                " syntax highlighting for c++
 Plugin 'scrooloose/nerdcommenter'           " Comment functions
 Plugin 'tpope/vim-fugitive'                 " Git wrapper
 Plugin 'godlygeek/tabular'                  " Text alignment
+Plugin 'ludovicchabant/vim-gutentags'       " Ctags
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -47,7 +48,8 @@ let g:ycm_clangd_uses_ycmd_caching                  = 0                 "  Let c
 let g:ycm_clangd_binary_path                        = exepath("clangd") "  Use installed clangd, not YCM-bundled clangd which doesn't get updates.
 let g:ycm_min_num_of_chars_for_completetion         = 1
 let g:ycm_autoclose_preview_window_after_insertion  = 1
-nnoremap T :YcmCompleter Goto<CR>
+"let g:ycm_semantic_triggers =  { 'cpp,cuda,objcpp': ['->', '.', '::', 're!\[[a-zA-Z]'], }
+nnoremap T :YcmCompleter GoTo<CR>
 
 
 " UltiSnips
@@ -69,7 +71,7 @@ endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Close vim when no more buffers are open
 let NERDTreeShowHidden = 1          " Show hidden files in tree
 let g:NERDTreeWinSize  = 40         " Set default size of nerdtree window
-"let NERDTreeIgnore     = ['\.swp$'] " Ignore files in nerdtree
+let NERDTreeIgnore     = ['\.swp$'] " Ignore files in nerdtree
 nmap <F7> :NERDTreeToggle<CR> 
 
 " TagBar
@@ -79,7 +81,7 @@ let g:tagbar_width = 50 " Set default size of tagbar window
 
 
 " Airline
-let g:airline_theme='dark_minimal'
+let g:airline_theme                              = 'dark_minimal'
 let g:airline#extensions#tabline#enabled         = 1 " Automatically displays all buffers when there's only one tab open
 let g:airline_powerline_fonts                    = 1 " Enable powerline fonts
 let g:airline#extensions#tabline#buffer_idx_mode = 1
@@ -116,3 +118,57 @@ if executable('ag') " Use ag for ctrlp and grep if available
 endif
 
 
+" Gutentag
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_empty_buffer = 0
+let g:gutentags_ctags_exclude = [
+      \ '*.git', '*.svg', '*.hg',
+      \ '*/tests/*',
+      \ 'build',
+      \ 'dist',
+      \ '*sites/*/files/*',
+      \ 'bin',
+      \ 'node_modules',
+      \ 'bower_components',
+      \ 'cache',
+      \ 'compiled',
+      \ 'docs',
+      \ 'example',
+      \ 'bundle',
+      \ 'vendor',
+      \ '*.md',
+      \ '*-lock.json',
+      \ '*.lock',
+      \ '*bundle*.js',
+      \ '*build*.js',
+      \ '.*rc*',
+      \ '*.json',
+      \ '*.xml',
+      \ '*.min.*',
+      \ '*.map',
+      \ '*.bak',
+      \ '*.zip',
+      \ '*.pyc',
+      \ '*.class',
+      \ '*.sln',
+      \ '*.Master',
+      \ '*.csproj',
+      \ '*.tmp',
+      \ '*.csproj.user',
+      \ '*.cache',
+      \ '*.pdb',
+      \ 'tags*',
+      \ 'cscope.*',
+      \ '*.html',
+      \ '*.css',
+      \ '*.less',
+      \ '*.scss',
+      \ '*.exe', '*.dll',
+      \ '*.mp3', '*.ogg', '*.flac',
+      \ '*.swp', '*.swo',
+      \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
+      \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
+      \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
+      \ ]
