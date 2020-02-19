@@ -40,6 +40,8 @@ noremap <leader><esc> :nohl<cr>
 nnoremap <leader>q :bp<cr>:bd #<cr> 
 " Grep word under cursor with gr
 nnoremap gr :grep <cword> *<CR>
+" Use 't' for jumping to tags(ctrl+t jumps back)
+nnoremap t <C-]>
 
 " TODO fix shortcut for moving lines
 " Move lines using Alt+j/k
@@ -66,3 +68,7 @@ map <D-A-UP> <C-w>W
 command! Autoread set autoread | au CursorHold * checktime | call feedkeys("lh")
 
 
+augroup DragQuickfixWindowDown
+  autocmd!
+  autocmd FileType qf wincmd J
+augroup end
