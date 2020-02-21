@@ -1,8 +1,9 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-set rtp+=$DOTFILES_DIR/vim/bundle/Vundle.vim " set the runtimSetup/ path to include Vundle and initialize
-call vundle#begin('$DOTFILES_DIR/vim/bundle/')
+let s:path = expand('<sfile>:p:h')
+let &runtimepath .= ',' . expand(s:path . '/bundle/Vundle.vim') " set the runtimSetup/ path to include Vundle and initialize
+call vundle#begin(expand(s:path . '/bundle/'))
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim' " required!
 
@@ -30,6 +31,7 @@ Plugin 'scrooloose/nerdcommenter'           " Comment functions
 Plugin 'tpope/vim-fugitive'                 " Git wrapper
 Plugin 'godlygeek/tabular'                  " Text alignment
 Plugin 'ludovicchabant/vim-gutentags'       " Ctags
+"Plugin 'skywind3000/gutentags_plus'         " gtags
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -119,10 +121,17 @@ endif
 
 
 " Gutentag
-let g:gutentags_generate_on_new = 1
-let g:gutentags_generate_on_missing = 1
-let g:gutentags_generate_on_write = 1
+"let g:gutentags_modules                  = ['ctags', 'gtags_cscope'] " enable gtags module
+"let g:gutentags_project_root             = ['.root']                 " config project root markers.
+"let g:gutentags_plus_switch              = 1                         " change focus to quickfix window after search (optional).
+let g:gutentags_generate_on_new          = 1
+let g:gutentags_generate_on_missing      = 1
+let g:gutentags_generate_on_write        = 1
 let g:gutentags_generate_on_empty_buffer = 0
+let g:gutentags_ctags_extra_args = [
+      \ '--tag-relative=yes',
+      \ '--fields=+ailmnS',
+      \ ]
 let g:gutentags_ctags_exclude = [
       \ '*.git', '*.svg', '*.hg',
       \ '*/tests/*',

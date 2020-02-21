@@ -1,6 +1,8 @@
 let mapleader=","
 
-so ~/dotfiles/vim/.vimrc_plugins
+" source plugins file
+" <sfile>:p:h = current script (this file), path, head (ie directory)
+so <sfile>:p:h/.vimrc_plugins
 
 set nocompatible
 set autoindent
