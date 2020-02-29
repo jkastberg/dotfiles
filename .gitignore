@@ -1,4 +1,5 @@
 *.uuid
+tags
 .git
 vim/bundle
 *.swp
